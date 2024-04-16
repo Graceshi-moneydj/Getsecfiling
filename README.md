@@ -68,7 +68,7 @@ py extract.py -i '\\j-daily5\temp\13F-CIK.csv'  -o '\\j-daily5\temp\13F-filing.c
 ``` 
 
 ## 測試xml
-ˋˋˋ
+``` sql
 DECLARE @xml xml  
 SET @xml =replace((SELECT * FROM OPENROWSET (BULK '\\s-daily8\USData\13F-SEC\data\1067983_20220930.xml', SINGLE_CLOB) as correlation_name) ,'xmlns="http://www.sec.gov/edgar/document/thirteenf/informationtable"' ,'')
 	
@@ -81,4 +81,4 @@ FROM @xml.nodes('informationTable') x1(informationTable)
 CROSS APPLY x1.informationTable.nodes('infoTable') x2(infoTable)
 ) xx
 group by sid,cusip
-ˋˋˋ
+``` 
